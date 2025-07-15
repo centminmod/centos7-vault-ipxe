@@ -68,7 +68,7 @@ volgroup centos --pesize=4096 pv.01
 logvol / --fstype="xfs" --size=8192 --name=root --vgname=centos --grow
 logvol /var --fstype="xfs" --size=4096 --name=var --vgname=centos
 logvol /home --fstype="xfs" --size=1024 --name=home --vgname=centos
-logvol swap --fstype="swap" --size=1024 --name=swap --vgname=centos
+logvol swap --fstype="swap" --size=4198 --name=swap --vgname=centos
 
 #################################################
 # PACKAGE SELECTION

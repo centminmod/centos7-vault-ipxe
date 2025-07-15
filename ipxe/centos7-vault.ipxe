@@ -1,6 +1,6 @@
 #!ipxe
 # CentOS 7 Installation from Vault - Custom iPXE Script
-# Created: Mon Jul 14 10:13:04 PM PDT 2025
+# Created: Mon Jul 14 11:08:46 PM PDT 2025
 # Repository: https://github.com/centminmod/centos7-vault-ipxe
 
 echo ================================================
