@@ -30,7 +30,7 @@ centos7-vault-ipxe/
 ```bash
 # Set your variables
 VULTR_API_KEY="your-vultr-api-key-here"
-curl -s "https://api.vultr.com/v2/ssh-keys"   -X GET   -H "Authorization: Bearer " | jq -r
+curl -s "https://api.vultr.com/v2/ssh-keys" -X GET -H "Authorization: Bearer ${VULTR_API_KEY}" | jq -r
 ```
 
 ```bash
@@ -185,6 +185,6 @@ This project is provided as-is for educational and testing purposes. CentOS 7 is
 
 ---
 
-**Created**: Tue Jul 15 12:29:52 AM PDT 2025  
+**Created**: Tue Jul 15 09:42:37 AM PDT 2025  
 **Repository**: https://github.com/centminmod/centos7-vault-ipxe  
 **Issues**: https://github.com/centminmod/centos7-vault-ipxe/issues
