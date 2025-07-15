@@ -1,6 +1,6 @@
 #!ipxe
 # CentOS 7 Installation from Vault - Custom iPXE Script
-# Created: Mon Jul 14 11:08:46 PM PDT 2025
+# Created: Tue Jul 15 12:29:52 AM PDT 2025
 # Repository: https://github.com/centminmod/centos7-vault-ipxe
 
 echo ================================================
@@ -42,11 +42,11 @@ set install_opts inst.text inst.headless
 
 # Kickstart options (comment/uncomment as needed)
 # For automated installation:
-# set kickstart_url https://centminmod.github.io/centos7-vault-ipxe/kickstarts/centos7-auto.ks
-# set ks_opts inst.ks=${kickstart_url}
+set kickstart_url https://centminmod.github.io/centos7-vault-ipxe/kickstarts/centos7-auto.ks
+set ks_opts inst.ks=${kickstart_url}
 
 # For interactive installation (default):
-set ks_opts
+# set ks_opts
 
 echo Downloading kernel: ${centos_kernel}
 kernel ${centos_kernel} ${base_opts} ${console_opts} ${install_opts} ${ks_opts}
