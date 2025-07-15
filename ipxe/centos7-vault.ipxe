@@ -1,0 +1,80 @@
+#!ipxe
+# CentOS 7 Installation from Vault - Custom iPXE Script
+# Created: Mon Jul 14 10:02:25 PM PDT 2025
+# Repository: https://github.com/centminmod/centos7-vault-ipxe
+
+echo ================================================
+echo   CentOS 7 Vault Installation
+echo ================================================
+echo Server Information:
+echo   Hostname: ${hostname}
+echo   MAC Address: ${mac}
+echo   IP Address: ${ip}
+echo   UUID: ${uuid}
+echo ================================================
+echo Loading CentOS 7 from vault.centos.org...
+echo This may take several minutes...
+echo ================================================
+
+# Configure network via DHCP
+dhcp
+
+# Set console parameters for VPS compatibility
+console --picture --keep
+
+# Show network configuration
+echo Network Configuration:
+echo   IP: ${ip}
+echo   Netmask: ${netmask}
+echo   Gateway: ${gateway}
+echo   DNS: ${dns}
+echo
+
+# CentOS 7 kernel and initrd from official vault
+set centos_base http://vault.centos.org/7.9.2009/os/x86_64
+set centos_kernel ${centos_base}/images/pxeboot/vmlinuz
+set centos_initrd ${centos_base}/images/pxeboot/initrd.img
+
+# Installation options
+set base_opts inst.repo=${centos_base} ip=dhcp nameserver=8.8.8.8
+set console_opts console=ttyS0,115200n8 console=tty0
+set install_opts inst.text inst.headless
+
+# Kickstart options (comment/uncomment as needed)
+# For automated installation:
+# set kickstart_url https://centminmod.github.io/centos7-vault-ipxe/kickstarts/centos7-auto.ks
+# set ks_opts inst.ks=${kickstart_url}
+
+# For interactive installation (default):
+set ks_opts
+
+echo Downloading kernel: ${centos_kernel}
+kernel ${centos_kernel} ${base_opts} ${console_opts} ${install_opts} ${ks_opts}
+
+echo Downloading initrd: ${centos_initrd}
+initrd ${centos_initrd}
+
+echo Starting CentOS 7 installer...
+echo
+boot || goto error
+
+:error
+echo
+echo ================================================
+echo   Boot Failed!
+echo ================================================
+echo Possible issues:
+echo - Network connectivity problems
+echo - Vault server unavailable
+echo - Incorrect kernel/initrd URLs
+echo - VPS hardware compatibility
+echo ================================================
+echo Dropping to iPXE shell for debugging...
+echo
+echo Useful commands:
+echo   dhcp          - Reconfigure network
+echo   route         - Show routing table
+echo   ifstat        - Show interface status
+echo   ping 8.8.8.8  - Test connectivity
+echo
+shell
